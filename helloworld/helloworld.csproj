@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="pi-top" Version="1.0.356" />
+  </ItemGroup>
+
+  <PropertyGroup>
+      <SshDeployHost>192.168.0.233</SshDeployHost>
+      <SshDeployTargetPath>/home/pi/helloworld</SshDeployTargetPath>
+      <SshDeployUsername>pi</SshDeployUsername>
+  </PropertyGroup>
+</Project>
