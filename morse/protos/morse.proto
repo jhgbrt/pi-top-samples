@@ -1,0 +1,18 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Morse.Service";
+
+package morse;
+
+service MorseTransmitter {
+  rpc TransmitMessage (MorseRequest) returns (MorseReply);
+}
+
+message MorseRequest {
+  string message = 1;
+}
+
+message MorseReply {
+  bool ok = 1;
+  string message = 2;
+}
