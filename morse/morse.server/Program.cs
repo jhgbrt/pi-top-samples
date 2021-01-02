@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using PiTop;
+
 Host.CreateDefaultBuilder(args)
     .ConfigureWebHostDefaults(webBuilder =>
     {
@@ -13,7 +15,12 @@ Host.CreateDefaultBuilder(args)
 
 public class Startup
 {
-    public void ConfigureServices(IServiceCollection services) => services.AddGrpc();
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddGrpc();
+        services.AddSingleton(PiTop4Board.Instance);
+    }
+
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         app.UseRouting()

@@ -10,9 +10,12 @@ service MorseTransmitter {
 
 message MorseRequest {
   string message = 1;
+  int32 wpm = 2;
+  int32 fwpm = 3;
 }
 
 message MorseReply {
   bool ok = 1;
   string message = 2;
+  int64 durationInTicks = 3;
 }

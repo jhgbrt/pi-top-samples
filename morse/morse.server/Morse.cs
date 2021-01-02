@@ -6,7 +6,10 @@ using System.Text;
 
 static class MorseEx
 {
-    public static ImmutableDictionary<char, string> morse = new (char alpha, string morse)[]
+    // see:
+    //  https://www.itu.int/dms_pubrec/itu-r/rec/m/R-REC-M.1677-1-200910-I!!PDF-E.pdf
+    //  https://morsecode.world/international/morse2.html
+    static ImmutableDictionary<char, string> Alphabet = new (char alpha, string morse)[]
     {
         ('A' , ".-"),
         ('B' , "-..."),
@@ -44,14 +47,30 @@ static class MorseEx
         ('7' , "--..."),
         ('8' , "---.."),
         ('9' , "----."),
+        ('.', ".-.-.-"),
+        (',', "--..--"),
+        (':', "---..."),
+        ('?', "..--.."),
+        ('\'', ".----."),
+        ('-', "-....-"),
+        ('/', "-..-."),
+        ('(', "-.--."),
+        (')', "-.--.-"),
+        ('"', ".-..-."),
         (' ' , "/"),
+        ('\t' , "/"),
+        ('=', "-...-"),
+        ('!', "-.-.--"),
+        ('+', ".-.-."),
+        ('@', ".--.-."),
+        ('&', ".-...")
     }.ToImmutableDictionary(x => x.alpha, x => x.morse);
-    public static IEnumerable<string> ToMorse(this string alphanumeric) => 
+
+    public static string ToMorse(this char c) => Alphabet[char.ToUpper(c)];
+    public static string ToMorse(this string alpha) => string.Join(" ", alpha.ToMorseImpl());
+    static IEnumerable<string> ToMorseImpl(this string alphanumeric) =>
         from c in alphanumeric.Normalize(NormalizationForm.FormD)
-        let category = CharUnicodeInfo.GetUnicodeCategory(c)
-        where category is UnicodeCategory.UppercaseLetter
-        or UnicodeCategory.LowercaseLetter
-        or UnicodeCategory.DecimalDigitNumber
-        or UnicodeCategory.SpaceSeparator
-        select morse[char.ToUpper(c)];
+        let u = char.ToUpper(c)
+        where Alphabet.ContainsKey(u)
+        select Alphabet[char.ToUpper(u)];
 }
