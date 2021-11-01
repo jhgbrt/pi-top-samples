@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-      <SshDeployHost>192.168.0.233</SshDeployHost>
+      <SshDeployHost>pi-top</SshDeployHost>
       <SshDeployTargetPath>/home/pi/helloworld</SshDeployTargetPath>
       <SshDeployUsername>pi</SshDeployUsername>
   </PropertyGroup>
